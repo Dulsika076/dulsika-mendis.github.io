@@ -2,30 +2,80 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Submit Feedback</title>
-</head>
-<body>
-    <h1>Submitting Feedback...</h1>
-    <p>Name: John Smith</p>
-    <p>Email: john.smith@example.com</p>
-    <p>Message: Great portfolio! Your work is impressive. I would love to connect and discuss potential collaborations. Keep up the excellent work!</p>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Submissions</title>
+    <style>
+        body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, sans-serif; background:#0f172a; color:#e2e8f0; margin:0; }
+        header { padding:20px 24px; background:#111827; display:flex; align-items:center; justify-content:space-between; }
+        header a { color:#a5b4fc; text-decoration:none; font-weight:600; }
+        h1 { font-size:20px; margin:0; }
+        main { max-width:900px; margin: 24px auto; padding: 0 16px 40px; }
+        .empty { color:#94a3b8; background:#0b1220; border:1px solid #1f2937; padding:24px; border-radius:12px; }
+        .list { display:grid; gap:16px; margin-top:16px; }
+        .card { background:#0b1220; border:1px solid #1f2937; border-radius:12px; padding:16px; }
+        .meta { display:flex; gap:12px; color:#9ca3af; font-size:12px; margin-bottom:8px; flex-wrap:wrap; }
+        .name { font-weight:600; color:#e5e7eb; }
+        .badge { background:#1d4ed8; color:#fff; font-size:11px; padding:2px 8px; border-radius:999px; }
+        .controls { display:flex; gap:10px; margin: 16px 0; }
+        button { background:#6366f1; color:#fff; border:none; padding:10px 14px; border-radius:8px; cursor:pointer; }
+        button.secondary { background:#374151; }
+        pre { white-space:pre-wrap; margin:0; color:#cbd5e1; }
+    </style>
     <script>
-        // Simulate the original form submission
-        const feedbackData = {
-            name: 'John Smith',
-            email: 'john.smith@example.com',
-            message: 'Great portfolio! Your work is impressive. I would love to connect and discuss potential collaborations. Keep up the excellent work!'
-        };
-        
-        console.log('Feedback submitted:');
-        console.log(feedbackData);
-        
-        // Show success message
-        setTimeout(() => {
-            document.body.innerHTML += '<h2 style="color: green; margin-top: 30px;">✓ Feedback submitted successfully!</h2>';
-            document.body.innerHTML += '<p>The form would send this feedback to your email.</p>';
-        }, 500);
+        function fmt(ts){ try{ return new Date(ts).toLocaleString(); }catch{ return ts; } }
+        function load(){
+            const list = JSON.parse(localStorage.getItem('feedbacks') || '[]');
+            const last = parseInt(localStorage.getItem('lastFeedbackIndex') || '-1', 10);
+            const root = document.getElementById('root');
+            root.innerHTML = '';
+            const controls = document.getElementById('controls');
+            controls.style.display = list.length ? 'flex' : 'none';
+
+            if(!list.length){
+                root.innerHTML = '<div class="empty">No feedback submitted yet.</div>';
+                return;
+            }
+            const container = document.createElement('div');
+            container.className = 'list';
+            list.forEach((f,idx)=>{
+                const card = document.createElement('div');
+                card.className = 'card';
+                const isLast = idx === last;
+                card.innerHTML = `
+                    <div class="meta">
+                        <span class="name">${f.name || 'Anonymous'}</span>
+                        <span>•</span>
+                        <span>${f.email || 'no-email'}</span>
+                        <span>•</span>
+                        <span>${fmt(f.createdAt)}</span>
+                        ${isLast ? '<span class="badge">New</span>' : ''}
+                    </div>
+                    <pre>${(f.message || '').trim()}</pre>
+                `;
+                container.appendChild(card);
+            });
+            root.appendChild(container);
+        }
+        function clearAll(){
+            localStorage.removeItem('feedbacks');
+            localStorage.removeItem('lastFeedbackIndex');
+            load();
+        }
+        function back(){ window.location.href = 'index.html#contact'; }
+        window.addEventListener('DOMContentLoaded', load);
     </script>
+    </head>
+<body>
+    <header>
+        <h1>Feedback Submissions</h1>
+        <a href="index.html#contact">← Back to site</a>
+    </header>
+    <main>
+        <div id="controls" class="controls" style="display:none;">
+            <button onclick="back()">Back to Contact</button>
+            <button class="secondary" onclick="clearAll()">Clear All</button>
+        </div>
+        <div id="root" class="list"></div>
+    </main>
 </body>
 </html>

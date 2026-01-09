@@ -1,8 +1,26 @@
 // Form submission handler
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    alert('Thank you for your message! I will get back to you soon.');
-    this.reset();
+    
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    const entry = {
+        name,
+        email,
+        message,
+        createdAt: new Date().toISOString()
+    };
+
+    const STORE_KEY = 'feedbacks';
+    const list = JSON.parse(localStorage.getItem(STORE_KEY) || '[]');
+    list.push(entry);
+    localStorage.setItem(STORE_KEY, JSON.stringify(list));
+    localStorage.setItem('lastFeedbackIndex', String(list.length - 1));
+
+    // Redirect to the submissions view
+    window.location.href = 'submit_feedback.html';
 });
 
 // Smooth scroll for navigation links
