@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Feedback</title>
+</head>
+<body>
+    <h1>Submitting Feedback...</h1>
+    <p>Name: John Smith</p>
+    <p>Email: john.smith@example.com</p>
+    <p>Message: Great portfolio! Your work is impressive. I would love to connect and discuss potential collaborations. Keep up the excellent work!</p>
+    
+    <script>
+        // Simulate the original form submission
+        const feedbackData = {
+            name: 'John Smith',
+            email: 'john.smith@example.com',
+            message: 'Great portfolio! Your work is impressive. I would love to connect and discuss potential collaborations. Keep up the excellent work!'
+        };
+        
+        console.log('Feedback submitted:');
+        console.log(feedbackData);
+        
+        // Show success message
+        setTimeout(() => {
+            document.body.innerHTML += '<h2 style="color: green; margin-top: 30px;">✓ Feedback submitted successfully!</h2>';
+            document.body.innerHTML += '<p>The form would send this feedback to your email.</p>';
+        }, 500);
+    </script>
+</body>
+</html>
