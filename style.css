@@ -328,6 +328,56 @@ section {
     margin-top: 2rem;
 }
 
+/* Certifications Section */
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.cert-card {
+    background: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 14px;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.cert-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 16px 40px rgba(99, 102, 241, 0.25);
+    border-color: var(--primary-color);
+}
+
+.cert-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.cert-header h3 {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    line-height: 1.4;
+}
+
+.cert-issuer {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.cert-meta,
+.cert-file,
+.cert-id {
+    color: #94a3b8;
+    font-size: 0.95rem;
+}
+
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
