@@ -347,6 +347,21 @@ section {
     gap: 0.6rem;
 }
 
+.cert-image {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #0f172a;
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.cert-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+}
+
 .cert-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 16px 40px rgba(99, 102, 241, 0.25);
