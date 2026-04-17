@@ -1,9 +1,12 @@
 // Form submission handler
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('Thank you for your message! I will get back to you soon.');
-    this.reset();
-});
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Thank you for your message! I will get back to you soon.');
+        this.reset();
+    });
+}
 
 // Smooth scroll for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -99,7 +102,7 @@ if (footerText && footerText.textContent.includes('2026')) {
 }
 
 // Smooth reveal for skill cards
-const skillCards = document.querySelectorAll('.skill-card, .project-card, .stat-box');
+const skillCards = document.querySelectorAll('.skill-card, .project-card, .stat-box, .experience-card');
 skillCards.forEach((card, index) => {
     card.style.opacity = '0';
     card.style.transform = 'translateY(30px)';
